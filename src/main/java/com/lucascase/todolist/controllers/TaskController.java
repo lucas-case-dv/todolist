@@ -34,7 +34,7 @@ public class TaskController {
         return ResponseEntity.created(uri).build(); //Sends 201 with location
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @Validated
     public ResponseEntity<Void> update(@Valid @RequestBody Task obj, @PathVariable Long id) {
         obj.setId(id); //Sets correct id
