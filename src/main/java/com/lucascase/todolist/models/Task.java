@@ -23,12 +23,25 @@ public class Task {
     @Size(min = 1, max = 255)
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Task() {
     }
 
-    public Task(Long id, String description) {
+    public Task(Long id, String description, User user) {
         this.id = id;
         this.description = description;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Long getId() {
