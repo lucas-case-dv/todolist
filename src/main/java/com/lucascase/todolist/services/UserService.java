@@ -35,9 +35,9 @@ public class UserService {
     }
 
     @Transactional
-    public void delete(User obj) {
+    public void delete(Long id) {
         try {
-            this.userRepository.deleteById(obj.getId());
+            this.userRepository.deleteById(id);
         } catch (Exception e) {
             throw new RuntimeException("Could not delete user.");
         }
