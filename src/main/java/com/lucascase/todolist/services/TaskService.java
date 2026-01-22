@@ -3,6 +3,8 @@ package com.lucascase.todolist.services;
 import com.lucascase.todolist.models.Task;
 import com.lucascase.todolist.models.User;
 import com.lucascase.todolist.repositories.TaskRepository;
+import com.lucascase.todolist.services.exceptions.DataBindingViolationException;
+import com.lucascase.todolist.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +24,7 @@ public class TaskService {
     //Read operation
     public Task findById(Long id) {
         Optional<Task> task = this.taskRepository.findById(id); //Uses repository method
-        return task.orElseThrow(() -> new RuntimeException(
+        return task.orElseThrow(() -> new ObjectNotFoundException(
                 "Task not found."));
     }
 
@@ -51,7 +53,7 @@ public class TaskService {
         try {
             this.taskRepository.deleteById(id);
         } catch (Exception e) {
-            throw new RuntimeException("It was not possible to delete the task with id: " + id);
+            throw new DataBindingViolationException("It was not possible to delete the task with id: " + id);
         }
     }
 }

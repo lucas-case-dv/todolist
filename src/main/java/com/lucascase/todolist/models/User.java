@@ -30,7 +30,7 @@ public class User {
 
     @NotBlank(groups = CreateUser.class)
     @Size(groups = CreateUser.class, min = 2, max = 128)
-    @Column(name = "username", nullable = false, length = 128)
+    @Column(name = "username", nullable = false, unique = true, length = 128)
     private String username;
 
     @NotBlank(groups = {CreateUser.class, UpdateUser.class})

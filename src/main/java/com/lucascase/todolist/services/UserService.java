@@ -2,6 +2,8 @@ package com.lucascase.todolist.services;
 
 import com.lucascase.todolist.models.User;
 import com.lucascase.todolist.repositories.UserRepository;
+import com.lucascase.todolist.services.exceptions.DataBindingViolationException;
+import com.lucascase.todolist.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,7 @@ public class UserService {
 
     public User findById(Long id) {
         Optional<User> user = this.userRepository.findById(id);
-        return user.orElseThrow(() -> new RuntimeException(
+        return user.orElseThrow(() -> new ObjectNotFoundException(
                 "User not found."));
     }
 
@@ -39,7 +41,7 @@ public class UserService {
         try {
             this.userRepository.deleteById(id);
         } catch (Exception e) {
-            throw new RuntimeException("Could not delete user.");
+            throw new DataBindingViolationException("Could not delete user.");
         }
     }
 }
