@@ -3,13 +3,17 @@ package com.lucascase.todolist.services;
 import com.lucascase.todolist.models.User;
 import com.lucascase.todolist.models.enums.ProfileEnum;
 import com.lucascase.todolist.repositories.UserRepository;
+import com.lucascase.todolist.security.UserSpringSecurity;
+import com.lucascase.todolist.services.exceptions.AuthorizationException;
 import com.lucascase.todolist.services.exceptions.DataBindingViolationException;
 import com.lucascase.todolist.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -24,6 +28,14 @@ public class UserService {
     private UserRepository userRepository;
 
     public User findById(Long id) {
+        UserSpringSecurity userSpringSecurity = authenticated();
+        if (Objects.isNull(userSpringSecurity)) {
+            throw new AuthorizationException("Access Denied");
+        }
+
+        if (!userSpringSecurity.hasRole(ProfileEnum.ADMIN) && !id.equals(userSpringSecurity.getId())) {
+            throw new AuthorizationException("You are not allowed to access this resource");
+        }
         Optional<User> user = this.userRepository.findById(id);
         return user.orElseThrow(() -> new ObjectNotFoundException(
                 "User not found."));
@@ -53,4 +65,14 @@ public class UserService {
             throw new DataBindingViolationException("Could not delete user.");
         }
     }
+
+    public static UserSpringSecurity authenticated() {
+        try {
+            return (UserSpringSecurity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        }
+        catch (Exception e) {
+            return null;
+        }
+    }
+
 }
