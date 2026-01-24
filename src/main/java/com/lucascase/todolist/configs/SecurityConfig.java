@@ -1,6 +1,7 @@
 package com.lucascase.todolist.configs;
 
 import com.lucascase.todolist.security.JWTAuthenticationFilter;
+import com.lucascase.todolist.security.JWTAuthorizationFilter;
 import com.lucascase.todolist.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -63,7 +64,8 @@ public class SecurityConfig {
 
                 .authenticationManager(authenticationManager)
 
-                .addFilter(new JWTAuthenticationFilter(authenticationManager, jwtUtil));
+                .addFilter(new JWTAuthenticationFilter(authenticationManager, jwtUtil))
+                .addFilter(new JWTAuthorizationFilter(authenticationManager, jwtUtil, userDetailsService));
 
         return http.build();
     }
