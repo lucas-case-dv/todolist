@@ -17,30 +17,25 @@ import java.util.stream.Collectors;
 @Table(name = User.TABLE_NAME)
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@EqualsAndHashCode
+@Data
 public class User {
-
-    public interface CreateUser {}
-    public interface UpdateUser {}
 
     public static final String TABLE_NAME = "users";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(groups = CreateUser.class)
-    @Size(groups = CreateUser.class, min = 2, max = 128)
-    @Column(name = "username", nullable = false, unique = true, length = 128)
+    @Column(name = "username", nullable = false, unique = true, length = 100)
+    @Size(min = 2, max = 100)
+    @NotBlank
     private String username;
 
-    @NotBlank(groups = {CreateUser.class, UpdateUser.class})
+    @Column(name = "password", nullable = false, length = 60)
+    @Size(min = 8, max = 60)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Size(groups = {CreateUser.class, UpdateUser.class}, min = 4, max = 128)
-    @Column(name = "password", nullable = false, length = 128)
+    @NotBlank
     private String password;
 
     @OneToMany(mappedBy = "user")

@@ -1,12 +1,15 @@
 package com.lucascase.todolist.services;
 
 import com.lucascase.todolist.models.User;
+import com.lucascase.todolist.models.dto.UserCreateDTO;
+import com.lucascase.todolist.models.dto.UserUpdateDTO;
 import com.lucascase.todolist.models.enums.ProfileEnum;
 import com.lucascase.todolist.repositories.UserRepository;
 import com.lucascase.todolist.security.UserSpringSecurity;
 import com.lucascase.todolist.services.exceptions.AuthorizationException;
 import com.lucascase.todolist.services.exceptions.DataBindingViolationException;
 import com.lucascase.todolist.services.exceptions.ObjectNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -73,6 +76,20 @@ public class UserService {
         catch (Exception e) {
             return null;
         }
+    }
+
+    public User fromDTO(@Valid UserCreateDTO obj) {
+        User user = new User();
+        user.setUsername(obj.getUsername());
+        user.setPassword(obj.getPassword());
+        return user;
+    }
+
+    public User fromDTO(@Valid UserUpdateDTO obj) {
+        User user = new User();
+        user.setId(obj.getId());
+        user.setPassword(obj.getPassword());
+        return user;
     }
 
 }

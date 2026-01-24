@@ -1,6 +1,7 @@
 package com.lucascase.todolist.controllers;
 
 import com.lucascase.todolist.models.Task;
+import com.lucascase.todolist.models.projection.TaskProjection;
 import com.lucascase.todolist.services.TaskService;
 import com.lucascase.todolist.services.UserService;
 import jakarta.validation.Valid;
@@ -31,8 +32,8 @@ public class TaskController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Task>> findAllByUser() {
-        List<Task> objs = this.taskService.findAllByUser();
+    public ResponseEntity<List<TaskProjection>> findAllByUser() {
+        List<TaskProjection> objs = this.taskService.findAllByUser();
         return ResponseEntity.ok().body(objs);
     }
 

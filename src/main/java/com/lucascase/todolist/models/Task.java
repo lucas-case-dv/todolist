@@ -10,21 +10,19 @@ import lombok.*;
 @Table(name = Task.TABLE_NAME)
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@EqualsAndHashCode
+@Data
 public class Task {
     public static final String TABLE_NAME = "tasks";
 
     //Id for task
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "description", length = 255, nullable = false)
-    @NotBlank
     @Size(min = 1, max = 255)
+    @NotBlank
     private String description;
 
     @ManyToOne

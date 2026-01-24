@@ -1,9 +1,10 @@
 package com.lucascase.todolist.controllers;
 
 import com.lucascase.todolist.models.User;
+import com.lucascase.todolist.models.dto.UserCreateDTO;
+import com.lucascase.todolist.models.dto.UserUpdateDTO;
 import com.lucascase.todolist.services.UserService;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -26,19 +27,19 @@ public class UserController {
     }
 
     @PostMapping
-    @Validated
-    public ResponseEntity<Void> create(@Valid @RequestBody User obj) {
-        this.userService.create(obj);
+    public ResponseEntity<Void> create(@Valid @RequestBody UserCreateDTO obj) {
+        User user = this.userService.fromDTO(obj);
+        User newUser = this.userService.create(user);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(obj.getId()).toUri();
+                .path("/{id}").buildAndExpand(newUser.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @PutMapping("/{id}")
-    @Validated
-    public ResponseEntity<Void> update(@Valid @RequestBody User obj, @PathVariable Long id) {
+    public ResponseEntity<Void> update(@Valid @RequestBody UserUpdateDTO obj, @PathVariable Long id) {
         obj.setId(id);
-        this.userService.update(obj);
+        User user = this.userService.fromDTO(obj);
+        this.userService.update(user);
         return ResponseEntity.noContent().build();
     }
 

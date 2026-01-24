@@ -3,6 +3,7 @@ package com.lucascase.todolist.services;
 import com.lucascase.todolist.models.Task;
 import com.lucascase.todolist.models.User;
 import com.lucascase.todolist.models.enums.ProfileEnum;
+import com.lucascase.todolist.models.projection.TaskProjection;
 import com.lucascase.todolist.repositories.TaskRepository;
 import com.lucascase.todolist.security.UserSpringSecurity;
 import com.lucascase.todolist.services.exceptions.AuthorizationException;
@@ -39,12 +40,12 @@ public class TaskService {
         return task;
     }
 
-    public List<Task> findAllByUser() {
+    public List<TaskProjection> findAllByUser() {
         UserSpringSecurity userSpringSecurity = UserService.authenticated();
         if (Objects.isNull(userSpringSecurity))
             throw new AuthorizationException("Access Denied");
 
-        List<Task> tasks = this.taskRepository.findByUser_Id(userSpringSecurity.getId());
+        List<TaskProjection> tasks = this.taskRepository.findByUser_Id(userSpringSecurity.getId());
         return tasks;
     }
 
