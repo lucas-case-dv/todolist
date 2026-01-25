@@ -34,3 +34,7 @@ build/
 
 ### Docker ###
 .env
+
+## Project ###
+src/main/resources/application-dev.properties
+bfg.jar
