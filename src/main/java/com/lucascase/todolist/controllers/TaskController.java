@@ -32,7 +32,7 @@ public class TaskController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<TaskProjection>> findAllByUser() {
+    public ResponseEntity<List<TaskProjection>> findAllByUser(@PathVariable Long userId) {
         List<TaskProjection> objs = this.taskService.findAllByUser();
         return ResponseEntity.ok().body(objs);
     }

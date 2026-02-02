@@ -2,9 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>To do List</title>
+  <link rel="stylesheet" href="styles/main-page.css">
 </head>
 <body>
+  <div class="header">
+    <div class="task-creation">
+      <form id="task-form">
+        <input type="text" id="description" name="description" class="task-input" placeholder="Add a task">
+        <button class="add-button" type="submit">ADD</button>
+      </form>
+    </div>
+    <a href="#" id="logout-btn" class="logout-button">Logout</a>
+  </div>
 
+  <ul id="task-list"></ul>
+<script src="scripts/script.js"></script>
 </body>
 </html>

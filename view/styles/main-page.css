@@ -156,3 +156,27 @@ input:focus {
 .delete-button:hover{
     color: #de0000;
 }
+
+.header {
+    display: flex;
+    justify-content: center;
+}
+
+.logout-button {
+    position: absolute;
+    color: black;
+    top: 20px;
+    right: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: text-decoration 0.3s;
+}
+
+.logout-button:hover {
+    text-decoration: underline;
+}
+
+.logout-button:visited {
+    color: black;
+    text-decoration: none;
+}
