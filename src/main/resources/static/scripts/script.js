@@ -4,7 +4,7 @@ if (!token) {
     window.location.href = "login.html";
 }
 
-fetch("http://localhost:8080/task/user/0", {
+fetch("/task/user/0", {
     headers: {
         "Authorization": token
     }
@@ -63,7 +63,7 @@ form.addEventListener("submit", function (e) {
 })
 
 function createTask(description) {
-    fetch("http://localhost:8080/task", {
+    fetch("/task", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -91,7 +91,7 @@ function createTask(description) {
 }
 
 function loadTasks() {
-    fetch("http://localhost:8080/task/user/0", {
+    fetch("/task/user/0", {
         headers: {
             Authorization: localStorage.getItem("token")
         }

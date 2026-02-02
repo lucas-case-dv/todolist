@@ -8,7 +8,7 @@ form.addEventListener("submit", function (event) {
         password: document.getElementById("password").value
     };
 
-    fetch("http://localhost:8080/user", {
+    fetch("/user", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
