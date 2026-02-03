@@ -12,4 +12,4 @@ RUN mvn clean package -DskipTests
 
 RUN mv $PROJECT_HOME/target/$JAR_NAME $PROJECT_HOME
 
-ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod", "todolist.jar"]
+ENTRYPOINT ["java", "-jar", "todolist.jar"]
