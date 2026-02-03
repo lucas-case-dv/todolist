@@ -47,10 +47,34 @@ This project was developed for learning purposes, focusing on REST APIs, authent
 2. Navigate to the project folder:
    ```bash
    cd todolist
-3. Run the application:
+3. Set the environment variables:
+   ```text
+   DB_URL=jdbc:mariadb://localhost:3306/todolist?createDatabaseIfNotExist=true
+   DB_USERNAME=your_mariadb_username
+   DB_PASSWORD=your_mariadb_password
+4. Run the application:
    ```bash
    mvn spring-boot:run
-4. Open in your browser:
+5. Open in your browser:
    ```bash
    http://localhost:8080
-   
+
+---
+
+## Authentication
+The application uses JWT (JSON Web Token) for authentication.
+- Login generates a JWT token
+- The token must be sent in the Authorization header for protected routes
+- The application is stateless
+
+---
+
+## Frontend & Backend Integration
+The frontend is hosted by the same Spring Boot application:
+- Frontend: `http://localhost:8080`
+- Backend: `http://localhost:8080`
+
+---
+
+## License
+This project is for educational purposes.
