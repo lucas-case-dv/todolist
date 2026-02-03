@@ -112,7 +112,7 @@ document.getElementById("task-list").addEventListener("click", function (e) {
 });
 
 function deleteTask(id) {
-    fetch(`http://localhost:8080/task/${id}`, {
+    fetch("/task/${id}", {
         method: "DELETE",
         headers: {
             Authorization: localStorage.getItem("token")
