@@ -11,7 +11,7 @@ This project was developed for learning purposes, focusing on REST APIs, authent
 - User registration and authentication
 - JWT-based stateless security
 - Create, read, update and delete tasks (CRUD)
-- Ready for cloud deployment
+- Ready for deployment
 
 ---
 
@@ -23,6 +23,7 @@ This project was developed for learning purposes, focusing on REST APIs, authent
 - JPA/Hibernate
 - Spring Security
 - JWT
+- Docker
 - Maven
 - MariaDB
 
@@ -69,11 +70,15 @@ The application uses JWT (JSON Web Token) for authentication.
 
 ---
 
-## Frontend & Backend Integration
-The frontend is hosted by the same Spring Boot application:
-- Frontend: `http://localhost:8080`
-- Backend: `http://localhost:8080`
-
+## Endpoints
+- GET User: ``/user/{id}``
+- POST User: ``/user``
+- UPDATE/DELETE User: ``/user/{id}``
+- GET Task: ``/task/{id}``
+- GET Tasks by User: ``/task/user/{id}``
+- POST Task: ``/task``
+- UPDATE/DELETE Task: ``/task{id}``
+- POST Login: ``/login``
 ---
 
 ## License
